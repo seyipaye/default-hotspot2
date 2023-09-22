@@ -168,6 +168,29 @@ input:focus {
     outline: 0
 }
 
+
+INPUT[type=checkbox] {
+    background-color: white;
+    outline: 1px solid #7d7d7d;
+    border-radius: 2px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    position: relative;
+    top: 4px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+INPUT[type=checkbox]:checked {
+    background-color: #E0371D;
+    background: #E0371D url("data:image/gif;base64,R0lGODlhCwAKAIABAP////3cnSH5BAEKAAEALAAAAAALAAoAAAIUjH+AC73WHIsw0UCjglraO20PNhYAOw==") 3px 3px no-repeat;
+}
+
+
 input[type=password],
 input[type=text] {
     width: 100%;
