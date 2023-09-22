@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Buy Data</title>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Internet hotspot - Log in</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .step {
+            margin-bottom: 20px;
+        }
+
+        .input-email {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .copy-link {
+            text-align: center;
+        }
+
+        .copy-link input {
+            width: 80%;
+        }
+
+        .copy-link button {
+            margin-left: 10px;
+        }
+
+        .success {
+            text-align: center;
+            font-weight: bold;
+            color: green;
+        }
+    </style> -->
+
+</head>
+
+<body>
+    <div class="ie-fixMinHeight">
+        <div class="main">
+            <div class="wrap animated fadeIn">
+
+                <h1>Buy Data</h1>
+                <div class="step">
+                    <h2>Step 1:</h2>
+                    <p>Enter your email to claim 20MB Data for recharge</p>
+                    <form id="email-form">
+                        <div class="input-email">
+                            <label>
+                                <img class="ico" src="img/user.svg" alt="#" />
+                                <!-- TODO: put $(username) -->
+                                <input name="username" type="email" id="email" value="$(username)"
+                                    placeholder="Username or Email address" required />
+                            </label>
+                            <button type="submit" class="claim-button">Claim</button>
+                        </div>
+                    </form>
+                    <div id="loading-indicator" class="loading-indicator"></div>
+
+                </div>
+
+                <div class="step">
+                    <h2>Step 2:</h2>
+                    <p>Tap to copy the link to the user portal</p>
+                    <div class="copy-link">
+                        <input type="copy-text" id="user-portal-link" value="https://portal.usefastlink.com/#/home" readonly>
+                        <button class="copy-button" onclick="copyLink()">Copy</button>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <h2>Step 3:</h2>
+                    <p>Login to the hotspot and follow these instructions to purchase a data plan:</p>
+
+                    <ol>
+                        <li>Open your preferred web browser</li>
+                        <li>Paste the copied link into the address bar</li>
+                        <!-- <li>Press Enter or Go to navigate to the user portal</li> -->
+                        <li>Follow the on-screen instructions to purchase a data plan</li>
+                    </ol>
+                    <button type="submit" class="claim-button"><a href="login.html"
+                            style="display: block; color:#E0371D; text-decoration: none">Login to
+                            Hotspot</a>
+
+                    </button>
+
+                </div>
+
+                <script>
+                    function copyLink() {
+                        var linkInput = document.getElementById("user-portal-link");
+                        linkInput.select();
+                        linkInput.setSelectionRange(0, 99999);
+                        document.execCommand("copy");
+                        alert("Link copied to clipboard!");
+                    }
+
+                    document.getElementById("email-form").addEventListener("submit", function (event) {
+                        event.preventDefault();
+                        var email = document.getElementById("email").value;
+
+                        // Show the loading indicator
+                        var loadingIndicator = document.getElementById("loading-indicator");
+                        loadingIndicator.style.display = "block";
+
+                        var baseUrl = 'https://fastlink-mt6m.onrender.com/api/v1'
+                        var endpointUrl = '/plans/claim-data?email=' + encodeURIComponent(email);
+
+
+                        fetch(baseUrl + endpointUrl, {
+                            method: 'POST',
+                        }).then(response => {
+                            // Hide the loading indicator
+                            loadingIndicator.style.display = "none";
+
+                            if (response.ok) {
+
+                                return response.json();
+                            } else {
+
+                                return response.json().then(parsedError => {
+                                    throw new Error(parsedError.message || 'Failed to claim data plan. Please try again later.');
+                                });
+                            }
+                        }).then(data => {
+
+
+                            // Retrieve the success message from the response data
+                            var successMessage = data.message;
+
+                            // Show success message
+                            var successElement = document.createElement("p");
+                            successElement.className = "success";
+                            successElement.textContent = successMessage;
+                            document.getElementById("email-form").appendChild(successElement);
+                        })
+                            .catch(error => {
+                                // Display error message
+                                alert(error.message);
+                            });
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+</html>
