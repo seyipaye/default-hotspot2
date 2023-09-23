@@ -79,52 +79,52 @@
                 //document.login.password.value = storedPassword;
             }
         });
+        
         function claimData() {
 
-            /*
             var email = document.getElementById("email").value;
 
-                        // Show the loading indicator
-                        var loadingIndicator = document.getElementById("loading-indicator");
-                        loadingIndicator.style.display = "block";
+            // Show the loading indicator
+            var loadingIndicator = document.getElementById("loading-indicator");
+            loadingIndicator.style.display = "block";
 
-                        var baseUrl = 'https://fastlink-mt6m.onrender.com/api/v1'
-                        var endpointUrl = '/plans/claim-data?email=' + encodeURIComponent(email);
-
-
-                        fetch(baseUrl + endpointUrl, {
-                            method: 'POST',
-                        }).then(response => {
-                            // Hide the loading indicator
-                            loadingIndicator.style.display = "none";
-
-                            if (response.ok) {
-
-                                return response.json();
-                            } else {
-
-                                return response.json().then(parsedError => {
-                                    throw new Error(parsedError.message || 'Failed to claim data plan. Please try again later.');
-                                });
-                            }
-                        }).then(data => {
+            var baseUrl = 'https://fastlink-mt6m.onrender.com/api/v1'
+            var endpointUrl = '/plans/claim-data?email=' + encodeURIComponent(email);
 
 
-                            // Retrieve the success message from the response data
-                            var successMessage = data.message;
+            fetch(baseUrl + endpointUrl, {
+                method: 'POST',
+            }).then(response => {
+                // Hide the loading indicator
+                loadingIndicator.style.display = "none";
 
-                            // Show success message
-                            var successElement = document.createElement("p");
-                            successElement.className = "success";
-                            successElement.textContent = successMessage;
-                            document.getElementById("email-form").appendChild(successElement);
-                        })
-                            .catch(error => {
-                                // Display error message
-                                alert(error.message);
-                            });
-            */
-            doLogin(document.getElementById("email").value);
+                if (response.ok) {
+
+                    return response.json();
+                } else {
+
+                    return response.json().then(parsedError => {
+                        throw new Error(parsedError.message || 'Failed to claim data plan. Please try again later.');
+                    });
+                }
+            }).then(data => {
+
+
+                // Retrieve the success message from the response data
+                var successMessage = data.message;
+
+                // Show success message
+                var successElement = document.createElement("p");
+                successElement.className = "success";
+                successElement.textContent = successMessage;
+                document.getElementById("email-form").appendChild(successElement);
+            })
+                .catch(error => {
+                    // Display error message
+                    alert(error.message);
+                });
+
+            //doLogin(document.getElementById("email").value);
             return false;
         }
 
