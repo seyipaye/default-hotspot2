@@ -30,6 +30,24 @@
 
   <script src="/md5.js"></script>
   <script>
+
+    // Check if username and password are stored in localStorage
+      const storedUsername = localStorage.getItem('username');
+      const storedPassword = localStorage.getItem('password');
+
+    // Pre-fill email field
+      document.addEventListener('DOMContentLoaded', function () {
+
+        // Check if both values exist
+        if (storedUsername && storedPassword) {
+          // Populate the login form fields with the stored values
+
+          console.log(storedUsername + '...' + storedPassword + 'Chap' + '$(chap-id)' + 'eeee' + '$(chap-challenge)');
+          document.getElementById("email").value = storedUsername;
+          document.getElementById("password").value = storedPassword;
+        }
+      });
+
     function doLogin() {
       document.sendin.username.value = document.login.username.value;
       document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
@@ -71,12 +89,12 @@
           </p>
           <label>
             <img class="ico" src="img/user.svg" alt="#" />
-            <input name="username" type="text" value="$(username)" placeholder="Username or Email address" />
+            <input id="email" name="username" type="text" value="$(username)" placeholder="Username or Email address" />
           </label>
 
           <label>
             <img class="ico" src="img/password.svg" alt="#" />
-            <input name="password" type="password" placeholder="Password" style="margin-bottom: 10px;" />
+            <input id="password" name="password" type="password" placeholder="Password" style="margin-bottom: 10px;" />
           </label>
 
           <!-- Add the "Remember Me" checkbox -->
@@ -93,7 +111,8 @@
         </form>
 
         <footer>
-          <a href="/buy-data.html">Buy or Claim Free Data</a>
+                    <!-- <a href="/buy-data.html">Buy or Claim Free Data</a> -->
+          <a href="https://portal.usefastlink.com">Out of Data? Buy data here</a>
         </footer>
         <footer style="margin-top: 5px;">
           <a href="https://seyipaye.notion.site/FastLink-Data-Plan-eb10d6cf7ada447390f8023024b3c192">Pricing</a>
